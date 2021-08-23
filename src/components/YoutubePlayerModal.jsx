@@ -40,7 +40,12 @@ export default function YoutubePlayerModal({ open = false, onClose, videoId }) {
     <div style={modalStyle} className={classes.paper}>
       <button
         onClick={onClose}
-        style={{ marginBottom: "5px", backgroundColor: "red", color: "white" }}
+        style={{
+          marginBottom: "5px",
+          backgroundColor: "#f50057",
+          color: "white",
+          borderRadius: "5px",
+        }}
       >
         x
       </button>
