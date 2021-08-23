@@ -7,8 +7,8 @@ function rand() {
 }
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -20,8 +20,14 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: "853px",
-    height: "480px",
+    [theme.breakpoints.down("sm")]: {
+      width: "400px",
+      height: "300px",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "800px",
+      height: "400px",
+    },
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
