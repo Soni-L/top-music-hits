@@ -1,9 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography, IconButton } from "@material-ui/core";
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import searchYoutube from "youtube-api-v3-search";
 import YoutubePlayerModal from "./YoutubePlayerModal";
+import YouTubeIcon from "@material-ui/icons/YouTube";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,12 +52,12 @@ export default function Content({
 
   const videoSearch = async (term) => {
     // PRETTY PLEASE (WITH SUGAR ON TOP) - DO NOT ABUSE THIS API KEY!!!!!
+    // this is on a free plan, so it has limitations on calls
     let result = await searchYoutube(
       "AIzaSyCMNWX9k8nPOn_6DwnKvjHkOnuv78kmv-k",
       { q: term }
     );
     setVideoId(result?.items[0]?.id?.videoId);
-    //http://www.youtube.com/watch?v=videoId
     setTimeout(() => {
       setOpen(true);
     }, 0);
@@ -89,7 +89,7 @@ export default function Content({
                         onClick={() => videoSearch(item.title.label)}
                         variant="sm"
                       >
-                        <PlayCircleFilledIcon />
+                        <YouTubeIcon color="secondary" />
                       </IconButton>
                     </div>
 

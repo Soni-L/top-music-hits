@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy":  "https://itunes.apple.com https://www.googleapis.com",
+  "proxy": "https://itunes.apple.com https://www.googleapis.com",
   "eslintConfig": {
     "extends": [
       "react-app",

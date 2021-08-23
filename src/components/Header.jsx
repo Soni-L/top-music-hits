@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchBar from "./SearchBar";
@@ -9,10 +9,11 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: "0.5em",
     marginBottom: "0.5em",
+    backgroundColor: "lightGray",
   },
   headerText: {
+    marginTop: "0.5em",
     marginBottom: "5px",
   },
   chipContainer: {
@@ -38,6 +39,9 @@ export default function Header({
   handleSearch,
 }) {
   const classes = useStyles();
+
+  const [searchText, setSearchText] = useState("");
+
   return (
     <div className={classes.root}>
       <Typography variant="h3" className={classes.headerText}>
@@ -47,16 +51,31 @@ export default function Header({
         <Chip
           label="Top albums"
           color={searchContext === "albums" ? "primary" : "default"}
-          onClick={showAlbums}
+          variant={searchContext === "albums" ? "default" : "outlined"}
+          onClick={() => {
+            showAlbums();
+            setSearchText("");
+            handleSearch();
+          }}
           className={classes.chip}
         />
         <Chip
           label="Top songs"
           color={searchContext === "songs" ? "primary" : "default"}
-          onClick={showSongs}
+          variant={searchContext === "songs" ? "default" : "outlined"}
+          onClick={() => {
+            showSongs();
+            setSearchText("");
+            handleSearch();
+          }}
           className={classes.chip}
         />
-        <SearchBar className={classes.searchBar} onSearch={handleSearch} />
+        <SearchBar
+          className={classes.searchBar}
+          onSearch={handleSearch}
+          searchText={searchText}
+          setSearchText={setSearchText}
+        />
       </div>
     </div>
   );
