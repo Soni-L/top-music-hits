@@ -9,7 +9,8 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginBottom: "1em",
+    marginTop: "0.5em",
+    marginBottom: "0.5em",
   },
   headerText: {
     marginBottom: "5px",

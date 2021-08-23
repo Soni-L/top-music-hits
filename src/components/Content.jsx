@@ -35,14 +35,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Content({
   searchContext,
-  searchText = "fancy",
+  searchText = "",
   topSongs,
   topAlbums,
 }) {
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} style={{ marginLeft: "0.5em" }}>
         {searchContext === "songs"
           ? topSongs
               .filter((item) =>
@@ -51,7 +52,7 @@ export default function Content({
                   .includes(searchText.toLowerCase())
               )
               .map((item) => (
-                <Grid item sm={3} lg={3} key={item.id.label}>
+                <Grid item xs={4} sm={3} lg={2} key={item.id.label}>
                   <div
                     style={{
                       display: "flex",
@@ -77,12 +78,12 @@ export default function Content({
                   .includes(searchText.toLowerCase())
               )
               .map((item) => (
-                <Grid item sm={3} lg={3} key={item.id.label}>
+                <Grid item xs={4} sm={3} lg={2} key={item.id.label}>
                   <div
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      alignItems: "center",
+                      alignItems: "flex-start",
                     }}
                   >
                     <img
@@ -90,9 +91,22 @@ export default function Content({
                       alt=""
                       width="100%"
                     />
-                    <Typography variant="caption" display="block" gutterBottom>
-                      {item.title.label}
-                    </Typography>
+                    <div>
+                      <Typography
+                        variant="caption"
+                        display="block"
+                        gutterBottom
+                      >
+                        {`Title: ${item.title.label}`}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        display="block"
+                        gutterBottom
+                      >
+                        {`Price: ${item?.["im:price"]?.label}`}
+                      </Typography>
+                    </div>
                   </div>
                 </Grid>
               ))}
