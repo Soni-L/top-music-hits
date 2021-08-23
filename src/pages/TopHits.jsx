@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import Content from "../components/Content";
@@ -23,24 +23,50 @@ const useStyles = makeStyles({
   },
 });
 
+export const SearchContext = React.createContext();
+
 export default function TopHits() {
   const classes = useStyles();
+
+  const [searchContext, setSearchContext] = useState("albums");
   const [topSongs, setTopSongs] = useState([]);
+  const [topAlbums, setTopAlbums] = useState([]);
 
   useEffect(() => {
-    async function fetchSongs() {
-      const response = await axios.get(
-        "https://itunes.apple.com/us/rss/topsongs/limit=100/json"
-      );
-      setTopSongs(response?.data?.feed?.entry);
+    if (searchContext === "songs") {
+      async function fetchSongs() {
+        const response = await axios.get(
+          "https://itunes.apple.com/us/rss/topsongs/limit=100/json"
+        );
+        setTopSongs(response?.data?.feed?.entry);
+      }
+      fetchSongs();
+    } else {
+      async function fetchAlbums() {
+        const response = await axios.get(
+          "https://itunes.apple.com/us/rss/topalbums/limit=100/json"
+        );
+        setTopAlbums(response?.data?.feed?.entry);
+        console.log(response?.data?.feed?.entry);
+      }
+      fetchAlbums();
     }
-    fetchSongs();
-  }, []);
+  }, [searchContext]);
 
   return (
     <div className={classes.root}>
-      <Header className={classes.header} />
-      <Content className={classes.content} topSongs={topSongs} />
+      <Header
+        className={classes.header}
+        showAlbums={() => setSearchContext("albums")}
+        showSongs={() => setSearchContext("songs")}
+        searchContext={searchContext}
+      />
+      <Content
+        searchContext={searchContext}
+        className={classes.content}
+        topSongs={topSongs}
+        topAlbums={topAlbums}
+      />
     </div>
   );
 }
