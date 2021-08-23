@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     overflow: "auto",
-    height: "80vh",
+    height: "75vh",
     width: "100%",
     overflowX: "hidden",
 
@@ -33,52 +33,69 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Content({ searchContext, topSongs, topAlbums }) {
+export default function Content({
+  searchContext,
+  searchText = "fancy",
+  topSongs,
+  topAlbums,
+}) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <Grid container spacing={1}>
         {searchContext === "songs"
-          ? topSongs.map((item) => (
-              <Grid item sm={3} lg={3} key={item.id.label}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src={item?.["im:image"]?.[2]?.label}
-                    alt=""
-                    width="100%"
-                  />
-                  <Typography variant="caption" display="block" gutterBottom>
-                    {item.title.label}
-                  </Typography>
-                </div>
-              </Grid>
-            ))
-          : topAlbums.map((item) => (
-              <Grid item sm={3} lg={3} key={item.id.label}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src={item?.["im:image"]?.[2]?.label}
-                    alt=""
-                    width="100%"
-                  />
-                  <Typography variant="caption" display="block" gutterBottom>
-                    {item.title.label}
-                  </Typography>
-                </div>
-              </Grid>
-            ))}
+          ? topSongs
+              .filter((item) =>
+                item?.title?.label
+                  ?.toLowerCase()
+                  .includes(searchText.toLowerCase())
+              )
+              .map((item) => (
+                <Grid item sm={3} lg={3} key={item.id.label}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      src={item?.["im:image"]?.[2]?.label}
+                      alt=""
+                      width="100%"
+                    />
+                    <Typography variant="caption" display="block" gutterBottom>
+                      {item.title.label}
+                    </Typography>
+                  </div>
+                </Grid>
+              ))
+          : topAlbums
+              .filter((item) =>
+                item?.title?.label
+                  ?.toLowerCase()
+                  .includes(searchText.toLowerCase())
+              )
+              .map((item) => (
+                <Grid item sm={3} lg={3} key={item.id.label}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      src={item?.["im:image"]?.[2]?.label}
+                      alt=""
+                      width="100%"
+                    />
+                    <Typography variant="caption" display="block" gutterBottom>
+                      {item.title.label}
+                    </Typography>
+                  </div>
+                </Grid>
+              ))}
       </Grid>
     </div>
   );

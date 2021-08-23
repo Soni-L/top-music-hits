@@ -27,8 +27,9 @@ export const SearchContext = React.createContext();
 
 export default function TopHits() {
   const classes = useStyles();
-
   const [searchContext, setSearchContext] = useState("albums");
+  const [searchText, setSearchText] = useState("");
+
   const [topSongs, setTopSongs] = useState([]);
   const [topAlbums, setTopAlbums] = useState([]);
 
@@ -60,12 +61,14 @@ export default function TopHits() {
         showAlbums={() => setSearchContext("albums")}
         showSongs={() => setSearchContext("songs")}
         searchContext={searchContext}
+        handleSearch={(e) => setSearchText(e)}
       />
       <Content
         searchContext={searchContext}
         className={classes.content}
         topSongs={topSongs}
         topAlbums={topAlbums}
+        searchText={searchText}
       />
     </div>
   );
