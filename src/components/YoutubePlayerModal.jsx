@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
   },
 }));
 
@@ -35,11 +38,16 @@ export default function YoutubePlayerModal({ open = false, onClose, videoId }) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <button onClick={onClose}>x</button>
+      <button
+        onClick={onClose}
+        style={{ marginBottom: "5px", backgroundColor: "red", color: "white" }}
+      >
+        x
+      </button>
       <iframe
         src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
         width="100%"
-        height="100%"
+        height="90%"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         title="Embedded youtube"
@@ -48,18 +56,8 @@ export default function YoutubePlayerModal({ open = false, onClose, videoId }) {
   );
 
   return (
-    <div>
-      <button type="button" onClick={onClose}>
-        Open Modal
-      </button>
-      <Modal
-        open={open}
-        onClose={onClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
-    </div>
+    <Modal open={open} onClose={onClose}>
+      {body}
+    </Modal>
   );
 }
