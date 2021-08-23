@@ -1,5 +1,6 @@
+import TopHits from "./pages/TopHits";
 function App() {
-  return <div className="App">hello benjamin</div>;
+  return <TopHits />;
 }
 
 export default App;
