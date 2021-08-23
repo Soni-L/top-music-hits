@@ -40,8 +40,8 @@ export default function Header({
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Typography variant="h3" component="h2" className={classes.headerText}>
-        Top Hits
+      <Typography variant="h3" className={classes.headerText}>
+        iTunes Top 100
       </Typography>
       <div className={classes.chipContainer}>
         <Chip

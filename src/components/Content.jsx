@@ -1,6 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, IconButton } from "@material-ui/core";
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import searchYoutube from "youtube-api-v3-search";
+import YoutubePlayerModal from "./YoutubePlayerModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
+  img: {
+    width: "100%",
+    height: "100%",
+  },
 }));
 
 export default function Content({
@@ -40,6 +47,21 @@ export default function Content({
   topAlbums,
 }) {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const [videoId, setVideoId] = React.useState("");
+
+  const videoSearch = async (term) => {
+    // PRETTY PLEASE (WITH SUGAR ON TOP) - DO NOT ABUSE THIS API KEY!!!!!
+    let result = await searchYoutube(
+      "AIzaSyCMNWX9k8nPOn_6DwnKvjHkOnuv78kmv-k",
+      { q: term }
+    );
+    setVideoId(result?.items[0]?.id?.videoId);
+    //http://www.youtube.com/watch?v=videoId
+    setTimeout(() => {
+      setOpen(true);
+    }, 0);
+  };
 
   return (
     <div className={classes.root}>
@@ -57,14 +79,27 @@ export default function Content({
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      alignItems: "center",
+                      alignItems: "flex-start",
                     }}
                   >
+                    <div
+                      style={{ backgroundColor: "lightgray", width: "100%" }}
+                    >
+                      <IconButton
+                        onClick={() => videoSearch(item.title.label)}
+                        variant="sm"
+                      >
+                        <PlayCircleFilledIcon />
+                      </IconButton>
+                    </div>
+
                     <img
+                      className={classes.img}
                       src={item?.["im:image"]?.[2]?.label}
                       alt=""
                       width="100%"
                     />
+
                     <Typography variant="caption" display="block" gutterBottom>
                       {item.title.label}
                     </Typography>
@@ -111,6 +146,11 @@ export default function Content({
                 </Grid>
               ))}
       </Grid>
+      <YoutubePlayerModal
+        open={open}
+        onClose={() => setOpen(false)}
+        videoId={videoId}
+      />
     </div>
   );
 }

@@ -48,7 +48,6 @@ export default function TopHits() {
           "https://itunes.apple.com/us/rss/topalbums/limit=100/json"
         );
         setTopAlbums(response?.data?.feed?.entry);
-        console.log(response?.data?.feed?.entry);
       }
       fetchAlbums();
     }
