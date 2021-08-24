@@ -2,10 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -25,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
       height: "300px",
     },
     [theme.breakpoints.up("md")]: {
-      width: "800px",
+      width: "700px",
       height: "400px",
     },
     backgroundColor: theme.palette.background.paper,

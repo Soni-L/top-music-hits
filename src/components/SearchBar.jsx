@@ -6,9 +6,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     alignItems: "center",
-    maxWidth: "500px",
     width: "100%",
-    backgroundColor: "#F0EAD6",
+    height: "35px",
+    backgroundColor: "#F5F5F5",
     borderRadius: "10px",
   },
   input: {

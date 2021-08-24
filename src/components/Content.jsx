@@ -4,6 +4,7 @@ import { Grid, Typography, IconButton } from "@material-ui/core";
 import searchYoutube from "youtube-api-v3-search";
 import YoutubePlayerModal from "./YoutubePlayerModal";
 import YouTubeIcon from "@material-ui/icons/YouTube";
+import ContentSkeleton from "./ContentSkeleton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,8 +67,9 @@ export default function Content({
   return (
     <div className={classes.root}>
       <Grid container spacing={1} style={{ marginLeft: "0.5em" }}>
-        {searchContext === "songs"
-          ? topSongs
+        {searchContext === "songs" ? (
+          topSongs.length > 0 ? (
+            topSongs
               .filter((item) =>
                 item?.title?.label
                   ?.toLowerCase()
@@ -106,45 +108,44 @@ export default function Content({
                   </div>
                 </Grid>
               ))
-          : topAlbums
-              .filter((item) =>
-                item?.title?.label
-                  ?.toLowerCase()
-                  .includes(searchText.toLowerCase())
-              )
-              .map((item) => (
-                <Grid item xs={4} sm={3} lg={2} key={item.id.label}>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <img
-                      src={item?.["im:image"]?.[2]?.label}
-                      alt=""
-                      width="100%"
-                    />
-                    <div>
-                      <Typography
-                        variant="caption"
-                        display="block"
-                        gutterBottom
-                      >
-                        {`Title: ${item.title.label}`}
-                      </Typography>
-                      <Typography
-                        variant="caption"
-                        display="block"
-                        gutterBottom
-                      >
-                        {`Price: ${item?.["im:price"]?.label}`}
-                      </Typography>
-                    </div>
+          ) : (
+            <ContentSkeleton />
+          )
+        ) : topAlbums.length > 0 ? (
+          topAlbums
+            .filter((item) =>
+              item?.title?.label
+                ?.toLowerCase()
+                .includes(searchText.toLowerCase())
+            )
+            .map((item) => (
+              <Grid item xs={4} sm={3} lg={2} key={item.id.label}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <img
+                    src={item?.["im:image"]?.[2]?.label}
+                    alt=""
+                    width="100%"
+                  />
+                  <div>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      {`Title: ${item.title.label}`}
+                    </Typography>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      {`Price: ${item?.["im:price"]?.label}`}
+                    </Typography>
                   </div>
-                </Grid>
-              ))}
+                </div>
+              </Grid>
+            ))
+        ) : (
+          <ContentSkeleton />
+        )}
       </Grid>
       <YoutubePlayerModal
         open={open}
