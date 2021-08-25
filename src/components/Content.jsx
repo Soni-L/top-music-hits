@@ -134,10 +134,15 @@ export default function Content({
                   />
                   <div>
                     <Typography variant="caption" display="block" gutterBottom>
-                      {`Title: ${item.title.label}`}
+                      {item.title.label}
                     </Typography>
-                    <Typography variant="caption" display="block" gutterBottom>
-                      {`Price: ${item?.["im:price"]?.label}`}
+                    <Typography
+                      variant="caption"
+                      display="block"
+                      gutterBottom
+                      style={{ color: "green" }}
+                    >
+                      {item?.["im:price"]?.label}
                     </Typography>
                   </div>
                 </div>
