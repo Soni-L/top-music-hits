@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     height: "75vh",
     width: "100%",
-    overflowX: "hidden",
+    boxSizing: "border-box",
+    margin: 0,
 
     "&::-webkit-scrollbar": {
       width: "1em",
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "transparent",
     },
     "&::-webkit-scrollbar-thumb": {
-      backgroundColor: "#D3D3D3",
+      backgroundColor: "darkgray",
       borderRadius: "1em",
       border: "3px solid transparent",
       backgroundClip: "content-box",
@@ -66,7 +67,11 @@ export default function Content({
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={1} style={{ marginLeft: "0.5em" }}>
+      <Grid
+        container
+        spacing={1}
+        style={{ paddingLeft: "0.3em", margin: 0, width: "100%" }}
+      >
         {searchContext === "songs" ? (
           topSongs.length > 0 ? (
             topSongs
