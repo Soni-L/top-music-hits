@@ -40,6 +40,18 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
   },
+  priceTag: {
+    position: "absolute",
+    right: "0",
+    color: "black",
+    backgroundColor: "#cfb53b",
+    borderLeft: "1px solid black",
+    borderBottom: "1px solid black",
+    boxShadow: "-1px 1px #F5F5F5",
+    borderBottomLeftRadius: "5px",
+    padding: "0.2em 0.3em 0 0.3em",
+    fontWeight: "bold",
+  },
 }));
 
 export default function Content({
@@ -130,8 +142,17 @@ export default function Content({
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "flex-start",
+                    position: "relative",
                   }}
                 >
+                  <Typography
+                    variant="caption"
+                    display="block"
+                    gutterBottom
+                    className={classes.priceTag}
+                  >
+                    {item?.["im:price"]?.label}
+                  </Typography>
                   <img
                     src={item?.["im:image"]?.[2]?.label}
                     alt=""
@@ -140,14 +161,6 @@ export default function Content({
                   <div>
                     <Typography variant="caption" display="block" gutterBottom>
                       {item.title.label}
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      display="block"
-                      gutterBottom
-                      style={{ color: "green" }}
-                    >
-                      {item?.["im:price"]?.label}
                     </Typography>
                   </div>
                 </div>
