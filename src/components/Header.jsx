@@ -18,13 +18,15 @@ const useStyles = makeStyles({
   },
   chipContainer: {
     marginBottom: "1em",
+    marginRight: "0.5em",
+    marginLeft: "0.5em",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
   },
   chip: {
-    marginRight: "1em",
+    marginRight: "0.5em",
   },
   searchBar: {
     marginTop: "1em",
