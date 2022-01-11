@@ -35,9 +35,14 @@ export default function TopHits() {
   const [topAlbums, setTopAlbums] = useState([]);
 
   React.useEffect(() => {
-    ReactGA.initialize("G-2Z38C3ZK22");
+    ReactGA.initialize("G-2Z38C3ZK22", {
+      gaOptions: {
+        userId: "42069",
+      },
+    });
+
     ReactGA.pageview(
-      'testlocation'
+      'tophits'
     );
   }, []);
 

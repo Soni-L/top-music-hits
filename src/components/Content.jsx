@@ -5,6 +5,7 @@ import searchYoutube from "youtube-api-v3-search";
 import YoutubePlayerModal from "./YoutubePlayerModal";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import ContentSkeleton from "./ContentSkeleton";
+import ReactGA from 'react-ga'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,6 +64,8 @@ export default function Content({
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [videoId, setVideoId] = React.useState("");
+
+  ReactGA.pageview("content");
 
   const videoSearch = async (term) => {
     // PRETTY PLEASE (WITH SUGAR ON TOP) - DO NOT ABUSE THIS API KEY!!!!!
