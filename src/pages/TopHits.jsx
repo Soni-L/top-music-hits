@@ -34,10 +34,8 @@ export default function TopHits() {
   const [topSongs, setTopSongs] = useState([]);
   const [topAlbums, setTopAlbums] = useState([]);
 
-  const TRACKING_ID = "298997754"; 
-
   React.useEffect(() => {
-    ReactGA.initialize(TRACKING_ID);
+    ReactGA.initialize("G-2Z38C3ZK22");
     ReactGA.pageview(
       'testlocation'
     );
