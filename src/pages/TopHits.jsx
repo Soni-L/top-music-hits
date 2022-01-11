@@ -37,7 +37,7 @@ export default function TopHits() {
   const TRACKING_ID = "298997754"; 
 
   React.useEffect(() => {
-    ReactGA.initialize("TRACKING_ID");
+    ReactGA.initialize(TRACKING_ID);
     ReactGA.pageview(
       'testlocation'
     );
