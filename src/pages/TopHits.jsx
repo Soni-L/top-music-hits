@@ -36,8 +36,11 @@ export default function TopHits() {
 
   React.useEffect(() => {
     ReactGA.initialize("G-2Z38C3ZK22", {
+      debug: true,
+      titleCase: false,
       gaOptions: {
         userId: "42069",
+        siteSpeedSampleRate: 100,
       },
     });
 
