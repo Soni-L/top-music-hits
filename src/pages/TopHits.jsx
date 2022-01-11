@@ -35,7 +35,7 @@ export default function TopHits() {
   const [topAlbums, setTopAlbums] = useState([]);
 
   React.useEffect(() => {
-    ReactGA.initialize("G-2Z38C3ZK22", {
+    ReactGA.initialize("UA-216811063-1", {
       debug: true,
       titleCase: false,
       gaOptions: {
