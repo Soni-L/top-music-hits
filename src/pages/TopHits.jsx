@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import Content from "../components/Content";
+import ReactGA from "react-ga";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -32,6 +33,15 @@ export default function TopHits() {
 
   const [topSongs, setTopSongs] = useState([]);
   const [topAlbums, setTopAlbums] = useState([]);
+
+  const TRACKING_ID = "298997754"; 
+
+  React.useEffect(() => {
+    ReactGA.initialize("TRACKING_ID");
+    ReactGA.pageview(
+      'testlocation'
+    );
+  }, []);
 
   useEffect(() => {
     if (searchContext === "songs") {
